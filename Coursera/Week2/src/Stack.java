@@ -3,7 +3,7 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 public class Stack<Item> implements Iterable<Item>{
-    private Node first = null;
+    private Node first;
     private int sz;
     private class Node {
         Item item;
