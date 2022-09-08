@@ -1,5 +1,4 @@
 import java.util.Iterator;
-import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 public class Deque<Item> implements Iterable<Item> {
@@ -59,9 +58,9 @@ public class Deque<Item> implements Iterable<Item> {
     if (this.isEmpty()) throw new NoSuchElementException();
     Item res = first.item;
     first = first.next;
-    if (first != null)
-      first.pre = null;
+    if (first != null) first.pre = null;
     else last = null;
+    sz--;
     return res;
   }
 
@@ -69,9 +68,9 @@ public class Deque<Item> implements Iterable<Item> {
     if (this.isEmpty()) throw new NoSuchElementException();
     Item res = last.item;
     last = last.pre;
-    if (last != null)
-      last.next = null;
+    if (last != null) last.next = null;
     else first = null;
+    sz--;
     return res;
   }
 
@@ -104,7 +103,7 @@ public class Deque<Item> implements Iterable<Item> {
   }
 
   public static void main(String[] args) {
-    Deque<Integer> dq = new Deque<Integer>();
+    Deque<Integer> dq = new Deque<>();
     Iterator<Integer> it = dq.iterator();
     if (dq.isEmpty()) {
       System.out.println("Empty");
@@ -113,17 +112,19 @@ public class Deque<Item> implements Iterable<Item> {
     dq.addFirst(5);
     dq.addLast(2);
     dq.addLast(6);
+    System.out.println(dq.size());
     it = dq.iterator();
     while (it.hasNext()) {
       System.out.println(it.next());
     }
+    dq.removeLast();
+    dq.removeLast();
     dq.removeFirst();
-    dq.removeLast();
-    dq.removeLast();
-    dq.removeLast();
+    dq.removeFirst();
     it = dq.iterator();
     while (it.hasNext()) {
       System.out.println(it.next());
     }
+    it.remove();
   }
 }
