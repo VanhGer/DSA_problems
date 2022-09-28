@@ -1,0 +1,3 @@
+Trong DSLK, chỉ có thể di chuyển tiến, lùi, đầu cuối. Do đó, khi sử dụng 
+Selection Sort hay Insertion Sort, ta sẽ gặp khó khăn trong việc swap những 
+phần tử. Như vậy, không nên sử dụng DSLK.
