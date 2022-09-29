@@ -3,8 +3,6 @@ import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.Stack;
 import edu.princeton.cs.algs4.StdOut;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Solver {
 
@@ -45,13 +43,15 @@ public class Solver {
     private int priority;
     private Board board;
     private boolean state;
+    private int manhattan;
 
     public Node(Node preBoard, int moves, Board board, boolean state) {
       this.preBoard = preBoard;
       this.moves = moves;
       this.board = board;
       this.state = state;
-      this.priority = this.board.manhattan() + this.moves;
+      this.manhattan = this.board.manhattan();
+      this.priority = this.manhattan + this.moves;
     }
 
     public Node(Node preBoard, Board board) {
@@ -59,7 +59,8 @@ public class Solver {
       this.board = board;
       this.moves = preBoard.moves + 1;
       this.state = preBoard.state;
-      this.priority = this.board.manhattan() + this.moves;
+      this.manhattan = this.board.manhattan();
+      this.priority = this.manhattan + this.moves;
     }
 
     @Override
@@ -67,7 +68,7 @@ public class Solver {
       if (this.priority != o.priority) {
         return this.priority - o.priority;
       }
-      return this.board.manhattan() - o.board.manhattan();
+      return this.manhattan - o.manhattan;
     }
   }
 

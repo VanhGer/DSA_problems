@@ -6,6 +6,8 @@ public class Board {
 
   private int[][] a;
   private int sz;
+  private int hamming = -1;
+  private int manhattan = -1;
   // create a board from an n-by-n array of tiles,
   // where tiles[row][col] = tile at (row, col)
   public Board(int[][] tiles) {
@@ -34,34 +36,42 @@ public class Board {
 
   // number of tiles out of place
   public int hamming() {
-    int res = 0;
+    if (hamming != -1) {
+      return hamming;
+    }
+    this.hamming = 0;
     for (int i = 0; i < sz; i++) {
       for (int j = 0; j < sz; j++) {
         if (a[i][j] == 0) continue;
         if (a[i][j] != (i * sz + j + 1)) {
-          res++;
+          hamming++;
         }
       }
     }
-    return res;
+    return hamming;
   }
 
   // sum of Manhattan distances between tiles and goal
   public int manhattan() {
-    int res = 0;
+    if (manhattan != -1)
+      return manhattan;
+    manhattan = 0;
     for (int i = 0; i < sz; i++)
       for (int j = 0; j < sz; j++) {
         if (a[i][j] == 0) continue;
         int x = (a[i][j] - 1) / sz;
         int y = (a[i][j] - 1) % sz;
-        res += Math.abs(x - i) + Math.abs(y - j);
+        manhattan += Math.abs(x - i) + Math.abs(y - j);
       }
-    return res;
+    return manhattan;
   }
 
   // is this board the goal board?
   public boolean isGoal() {
-    return manhattan() == 0;
+    if (this.manhattan == -1) {
+      return (this.manhattan() == 0);
+    }
+    return (this.manhattan == 0);
   }
 
   // does this board equal y?
